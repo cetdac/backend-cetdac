@@ -39,7 +39,8 @@ const FacebookStrategy = require('passport-facebook').Strategy
 passport.use(new FacebookStrategy({
     clientID: config.fb.clientId,
     clientSecret: config.fb.clientSecret,
-    callbackURL: config.host + '/api/auth/facebook/callback'
+    callbackURL: config.host + '/api/auth/facebook/callback',
+    profileFields: ['id', 'short_name', 'email', 'first_name', 'last_name', 'gender', 'location']
   },
   function(token, tokenSecret, profile, done) {
     // retrieve user ...
@@ -59,17 +60,17 @@ passport.use(new FacebookStrategy({
 //   }
 // ))
 
-// const GoogleStrategy = require('passport-google-auth').Strategy
-// passport.use(new GoogleStrategy({
-//     clientId: '852595544771-kerel776etav8jqgrc63dfl4k0q4pli7.apps.googleusercontent.com',
-//     clientSecret: 'STkNmVtDAigpN27NgfyziXw9',
-//     callbackURL: 'http://'+host+':' + (process.env.PORT || 3000) + '/auth/google/callback'
-//   },
-//   function(token, tokenSecret, profile, done) {
-//     // retrieve user ...
-//     fetchUser().then(user => done(null, user))
-//   }
-// ))
+const GoogleStrategy = require('passport-google-auth').Strategy
+passport.use(new GoogleStrategy({
+    clientId: '852595544771-kerel776etav8jqgrc63dfl4k0q4pli7.apps.googleusercontent.com',
+    clientSecret: 'STkNmVtDAigpN27NgfyziXw9',
+    callbackURL: config.host + '/api/auth/google/callback'
+  },
+  function(token, tokenSecret, profile, done) {
+    // retrieve user ...
+    fetchUser().then(user => done(null, user))
+  }
+))
 
 // const WeixinStrategy = require('passport-weixin-plus')
 // passport.use(new WeixinStrategy({
