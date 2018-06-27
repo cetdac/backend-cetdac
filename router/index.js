@@ -7,8 +7,8 @@ module.exports = function(routers) {
   routers.get('/auth/google', passport.authenticate('google'))
   routers.get('/auth/google/callback',
   passport.authenticate('google', {
-      successRedirect: '/success.html',
-      failureRedirect: '/failure.html'
+    successRedirect: '/success.html',
+    failureRedirect: '/failure.html'
   }))
   routers.get('/auth/google/webhook', google.webhook_verify)
 

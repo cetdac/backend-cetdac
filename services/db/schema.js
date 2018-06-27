@@ -1,82 +1,80 @@
 const Sequelize = require("sequelize"),
   connection = require("../db/connection")
 
-const _Promise = connection.define("_Promise", {
+const User = connection.define("User", {
     id: {
       primaryKey: true,
-      type:Sequelize.STRING(64), 
+      type:Sequelize.INTEGER,
+      autoIncrement:true, 
       allowNull:false,
       unique:true
     },
-    psid_a:{
-      type: Sequelize.STRING(45),
-      allowNull: false
-    },
-    psid_b:{
+    id_in_app:{
       type: Sequelize.STRING(45),
       allowNull: true
     },
-    parta: {
-      type: Sequelize.STRING(30),
-      allowNull: false
-    },
-    partb: {
-      type: Sequelize.STRING(30),
-      allowNull: false
-    },
-    paymentId:{
-      type: Sequelize.STRING(50),
+    name:{
+      type: Sequelize.STRING(65),
       allowNull: true
     },
-    details: {
+    first_name: {
+      type: Sequelize.STRING(30),
+      allowNull: true
+    },
+    last_name: {
+      type: Sequelize.STRING(30),
+      allowNull: true
+    },
+    birthday:{
+      type: Sequelize.DATEONLY,
+      allowNull: true
+    },
+    gender: {
+      type: Sequelize.STRING(5),
+      allowNull: true
+    },
+    avatar:{
       type: Sequelize.STRING(255),
-      allowNull: false
-    },
-    sign:{
-      type: Sequelize.STRING(35),
       allowNull: true
     },
     transactions:{
       type: Sequelize.TEXT,
       allowNull: true
     },
-    realip:{
-      type: Sequelize.STRING(50),
+    provider:{
+      type: Sequelize.STRING(10),
       allowNull: true
     },
     price:{
       type: Sequelize.DECIMAL(4,2),
       allowNull: false
     },
-    status:{
-      //draft, payed, promised
-      type: Sequelize.STRING(10),
-      allowNull: false
+    email:{
+      type: Sequelize.STRING(50),
+      allowNull: true
     },
-    platform:{
-      type: Sequelize.STRING(10),
-      allowNull: false
-    },
-    deleted:{
-      type: Sequelize.BOOLEAN,
-      allowNull: false
+    mobile:{
+      type: Sequelize.STRING(50),
+      allowNull: true
     },
     create_time:{
       type: Sequelize.DATE,
       allowNull:false
     },
-    checkout_time:{
-      type: Sequelize.DATE,
-      allowNull:true
+    from:{
+      //chrome, ios, android
+      type: Sequelize.STRING(10),
+      allowNull:false
     },
-    agree_time:{
-      type: Sequelize.DATE,
-      allowNull:true
+    status:{
+      //available, freezed, disabled
+      type: Sequelize.STRING(10),
+      allowNull:false
     }
   },{
     indexes: [{
       unique: true,
-      fields: ['id', 'deleted', 'status']
+      fields: ['id']
     }],
     timestamps: false,
     charset: "utf8"
@@ -86,5 +84,5 @@ const _Promise = connection.define("_Promise", {
 // Promise_.belongsTo(Account, {foreignKey: "account_id", sourceKey: "id"})
 
 module.exports = {
-  _Promise: _Promise
+  User: User
 }
