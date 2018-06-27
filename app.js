@@ -2,6 +2,8 @@ const util = require("./services/util/util")
 const Koa = require("koa")
 const Router = require("./router/index")
 const serve = require("koa-static")
+const passport = require('koa-passport')
+const session = require('koa-session')
 require("./services/social-login/auth")
 // const swagger = require("swagger2")
 // const KoaSwagger = require("swagger2-koa"),
@@ -13,6 +15,11 @@ const koaRouter = require("koa-router")({prefix: "/api"})
 const cors = require("koa-cors")
 const app = new Koa()
 app.use(bodyParser())
+app.keys = ['secret']
+app.use(session({}, app))
+//Auth
+app.use(passport.initialize())
+app.use(passport.session())
 
 require("./plugins/logger")
 // const document = swagger.loadDocumentSync("api/swagger/swagger.yaml")
