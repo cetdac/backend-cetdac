@@ -4,11 +4,7 @@ module.exports = {
   host:host,
   fb:{
     clientId:'2059520324314582',
-    clientSecret:'f4482f919ef4b33519d1ac0fc2fd1642',
-    redirect:{
-      success:'',
-      fail:''
-    }
+    clientSecret:'f4482f919ef4b33519d1ac0fc2fd1642'
   },
   google:{
     clientId:'852595544771-kerel776etav8jqgrc63dfl4k0q4pli7.apps.googleusercontent.com',

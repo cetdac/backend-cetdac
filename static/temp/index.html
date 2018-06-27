@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="demo.css">
+  <link rel="stylesheet" href="iconfont.css">
+  <title>Waiting...</title>
+</head>
+<body>
+  <div style="text-align: center;padding-top:20%;">
+    <i class="icon iconfont icon-wait" style="color:darkorange;font-size: 80px"></i>
+  </div>
+  <script>
+    var result = /result=(.*?)(?:&|$)/.exec(location.search)
+    if(result){
+      result = result[1]
+      var parentWindow = window.parent.window
+      if(/success/i.test(result)){
+        if(parentWindow !== window){
+          parentWindow.location.href = '/oauth/success'
+        }
+      }
+      else if(/fail/i.test(result)){
+        if(parentWindow !== window){
+          parentWindow.location.href = '/oauth/fail'
+        }
+      }
+    }
+  </script>
+</body>
+</html>
