@@ -39,7 +39,7 @@ const FacebookStrategy = require('passport-facebook').Strategy
 passport.use(new FacebookStrategy({
     clientID: config.fb.clientId,
     clientSecret: config.fb.clientSecret,
-    callbackURL: config.host + ':' + (process.env.PORT || 3000) + '/api/auth/facebook/callback'
+    callbackURL: config.host + '/api/auth/facebook/callback'
   },
   function(token, tokenSecret, profile, done) {
     // retrieve user ...

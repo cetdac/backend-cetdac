@@ -1,5 +1,5 @@
 let bitcoin = require('bitcoinjs-lib')
-let host = process.env.NODE_ENV === 'api-dev' ? 'http://chrome.approles.com/' : 'https://chrome.approles.com/'
+let host = process.env.NODE_ENV === 'api-dev' ? 'https://chrome.approles.com' : 'https://chrome.approles.com'
 module.exports = {
   host:host,
   fb:{
