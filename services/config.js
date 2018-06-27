@@ -9,5 +9,13 @@ module.exports = {
       success:'',
       fail:''
     }
+  },
+  google:{
+    clientId:'852595544771-kerel776etav8jqgrc63dfl4k0q4pli7.apps.googleusercontent.com',
+    clientSecret:'STkNmVtDAigpN27NgfyziXw9',
+  },
+  github:{
+    clientId:'2edd9b6edbe2c9d83749',
+    clientSecret:'de73980d6ab56028cbea953985b875850b7688fb',
   }
 }

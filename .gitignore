@@ -10,6 +10,7 @@ build/compile
 node_modules
 logs
 dist
+package-lock.json
 *.pid
 *.seed
 *.pid.lock

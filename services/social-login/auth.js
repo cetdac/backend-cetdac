@@ -40,9 +40,37 @@ passport.use(new FacebookStrategy({
     clientID: config.fb.clientId,
     clientSecret: config.fb.clientSecret,
     callbackURL: config.host + '/api/auth/facebook/callback',
-    profileFields: ['id', 'short_name', 'email', 'first_name', 'last_name', 'gender', 'location']
+    profileFields: ['id', 'displayName', 'email', 'name', 'gender', 'location', 'photos']
   },
   function(token, tokenSecret, profile, done) {
+    // retrieve user ...
+    console.log('facebook', profile)
+    fetchUser().then(user => done(null, user))
+  }
+))
+
+var GitHubStrategy = require('passport-github').Strategy;
+ 
+passport.use(new GitHubStrategy({
+    clientID: config.github.clientId,
+    clientSecret: config.github.clientSecret,
+    callbackURL: config.host + '/api/auth/github/callback'
+  },
+  function(token, tokenSecret, profile, done) {
+    console.log('github', profile)
+    // retrieve user ...
+    fetchUser().then(user => done(null, user))
+  }
+));
+
+const GoogleStrategy = require('passport-google-auth').Strategy
+passport.use(new GoogleStrategy({
+    clientId: config.google.clientId,
+    clientSecret: config.google.clientSecret,
+    callbackURL: config.host + '/api/auth/google/callback'
+  },
+  function(token, tokenSecret, profile, done) {
+    console.log('google', profile)
     // retrieve user ...
     fetchUser().then(user => done(null, user))
   }
@@ -59,18 +87,6 @@ passport.use(new FacebookStrategy({
 //     fetchUser().then(user => done(null, user))
 //   }
 // ))
-
-const GoogleStrategy = require('passport-google-auth').Strategy
-passport.use(new GoogleStrategy({
-    clientId: '852595544771-kerel776etav8jqgrc63dfl4k0q4pli7.apps.googleusercontent.com',
-    clientSecret: 'STkNmVtDAigpN27NgfyziXw9',
-    callbackURL: config.host + '/api/auth/google/callback'
-  },
-  function(token, tokenSecret, profile, done) {
-    // retrieve user ...
-    fetchUser().then(user => done(null, user))
-  }
-))
 
 // const WeixinStrategy = require('passport-weixin-plus')
 // passport.use(new WeixinStrategy({
