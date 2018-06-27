@@ -1,0 +1,29 @@
+{
+  "apps" : [
+    {
+      "name"      : "approles-service",
+      "instance_var":"APPROLES",
+      "script"    : "app.js",
+      "instances" : 0,
+      "exec_mode" : "cluster",
+      "watch"     : false,
+      "ignore_watch" : ["logs"],
+      "error_file":"logs/approles.service.stderr.log",
+      "out_file"  :"logs/approles.service.stdout.log",
+      "mergeLogs" : false,
+      "env": {
+        "NODE_ENV": "pm2-dev",
+        "DB_ENV": "pm2-dev"
+      },
+      "env_pre" : {
+        "NODE_ENV": "production",
+        "DB_ENV": "pre"
+      },
+      "env_production" : {
+        "NODE_ENV": "production",
+        "DB_ENV": "production",
+        "LOG_ENV": "production"
+      }
+    }
+  ]
+}
