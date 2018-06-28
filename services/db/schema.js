@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize"),
   connection = require("../db/connection")
 
-const User = connection.define("User", {
+const Account = connection.define("User", {
     id: {
       primaryKey: true,
       type:Sequelize.INTEGER,
@@ -84,5 +84,5 @@ const User = connection.define("User", {
 // Promise_.belongsTo(Account, {foreignKey: "account_id", sourceKey: "id"})
 
 module.exports = {
-  User: User
+  Account: Account
 }
