@@ -4,8 +4,7 @@ const Sequelize = require("sequelize"),
 const Account = connection.define("User", {
     id: {
       primaryKey: true,
-      type:Sequelize.INTEGER,
-      autoIncrement:true, 
+      type:Sequelize.STRING(60),
       allowNull:false,
       unique:true
     },
