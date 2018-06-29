@@ -10,41 +10,38 @@ const createUser = ((provider, profile) => {
     id_in_app: profile.id,
     mobile: profile.mobile,
     short_name : profile.displayName,
+    emails : profile.emails ? profile.emails.map(item=>{ return item.value}).join() : undefined,
     from: 'chrome'
   }
   if(/google/i.test(provider)){
-    user.avatar = profile.image.url
-    user.emails =  profile.emails.map(item=>{ return item.value}).join()
-    user.first_name = profile.name.givenName
-    user.last_name = profile.name.familyName
+    user.avatar = profile.image?profile.image.url:undefined
+    user.first_name = profile.name?profile.name.givenName:undefined
+    user.last_name = profile.name?profile.name.familyName:undefined
   } else if(/facebook/i.test(provider)){
-    user.avatar = profile.photos[0].value
-    user.emails =  profile.emails.map(item=>{ return item.value}).join()
-    user.first_name = profile.name.givenName
-    user.last_name = profile.name.familyName
+    user.avatar = profile.photos[0] ? profile.photos[0].value : undefined
+    user.first_name = profile.name?profile.name.givenName:undefined
+    user.last_name = profile.name?profile.name.familyName:undefined
   }else if(/github/i.test(provider)){
-    user.avatar = profile.photos[0].value
+    user.avatar = profile.photos[0] ? profile.photos[0].value : undefined
     user.location = profile.location
-    user.emails =  profile.emails.map(item=>{ return item.value}).join()
     user.short_name = profile.displayName
   }
-  return async function() {
-    return await account.createByProfile(user)
-  }
+  
+  return account.createByProfile(user)
 })
 
-// passport.serializeUser(function(user, done) {
-//   done(null, user.id)
-// })
+passport.serializeUser(function(user, done) {
+  done(null, user.id)
+})
 
-// passport.deserializeUser(async function(id, done) {
-//   try {
-//     const user = await fetchUser()
-//     done(null, user)
-//   } catch(err) {
-//     done(err)
-//   }
-// })
+passport.deserializeUser(async function(id, done) {
+  try {
+    const user = {id: id}
+    done(null, user)
+  } catch(err) {
+    done(err)
+  }
+})
 
 // const LocalStrategy = require('passport-local').Strategy
 // passport.use(new LocalStrategy(function(username, password, done) {
