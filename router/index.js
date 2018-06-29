@@ -1,8 +1,10 @@
 const passport = require('koa-passport')
 const google = require('../services/controller/google')
+const account = require('../services/controller/account')
 
 module.exports = function(routers) {
 
+  routers.post('/account', account.create)
   //google
   routers.get('/auth/google', passport.authenticate('google'))
   routers.get('/auth/google/callback',
@@ -21,7 +23,7 @@ module.exports = function(routers) {
 
   //facebook
   routers.get('/auth/facebook', passport.authenticate('facebook',{
-    scope: ['public_profile', 'user_gender', 'email']
+    scope: ['public_profile', 'user_gender', 'email', 'mobile']
   }))
   routers.get('/auth/facebook/callback', passport.authenticate('facebook', {
     successRedirect: '/auth/success',

@@ -1,26 +1,50 @@
 const passport = require('koa-passport')
 const config = require('../config')
+const account = require('../controller/account')
 
-const fetchUser = (() => {
+const createUser = ((provider, profile) => {
   // This is an example! Use password hashing in your
-  const user = { id: 1, username: 'test', password: 'test' }
+  let user = {
+    provider: provider,
+    mobile: profile.mobile,
+    id_in_app: profile.id,
+    mobile: profile.mobile,
+    short_name : profile.displayName,
+    from: 'chrome'
+  }
+  if(/google/i.test(provider)){
+    user.avatar = profile.image.url
+    user.emails =  profile.emails.map(item=>{ return item.value}).join()
+    user.first_name = profile.name.givenName
+    user.last_name = profile.name.familyName
+  } else if(/facebook/i.test(provider)){
+    user.avatar = profile.photos[0].value
+    user.emails =  profile.emails.map(item=>{ return item.value}).join()
+    user.first_name = profile.name.givenName
+    user.last_name = profile.name.familyName
+  }else if(/github/i.test(provider)){
+    user.avatar = profile.photos[0].value
+    user.location = profile.location
+    user.emails =  profile.emails.map(item=>{ return item.value}).join()
+    user.short_name = profile.displayName
+  }
   return async function() {
-    return user
-  }
-})()
-
-passport.serializeUser(function(user, done) {
-  done(null, user.id)
-})
-
-passport.deserializeUser(async function(id, done) {
-  try {
-    const user = await fetchUser()
-    done(null, user)
-  } catch(err) {
-    done(err)
+    return await account.createByProfile(user)
   }
 })
+
+// passport.serializeUser(function(user, done) {
+//   done(null, user.id)
+// })
+
+// passport.deserializeUser(async function(id, done) {
+//   try {
+//     const user = await fetchUser()
+//     done(null, user)
+//   } catch(err) {
+//     done(err)
+//   }
+// })
 
 // const LocalStrategy = require('passport-local').Strategy
 // passport.use(new LocalStrategy(function(username, password, done) {
@@ -45,7 +69,7 @@ passport.use(new FacebookStrategy({
   function(token, tokenSecret, profile, done) {
     // retrieve user ...
     console.log('facebook', profile)
-    fetchUser().then(user => done(null, user))
+    createUser('facebook',profile).then(user => done(null, user))
   }
 ))
 
@@ -59,7 +83,7 @@ passport.use(new GitHubStrategy({
   function(token, tokenSecret, profile, done) {
     console.log('github', profile)
     // retrieve user ...
-    fetchUser().then(user => done(null, user))
+    createUser('github', profile).then(user => done(null, user))
   }
 ));
 
@@ -72,7 +96,7 @@ passport.use(new GoogleStrategy({
   function(token, tokenSecret, profile, done) {
     console.log('google', profile)
     // retrieve user ...
-    fetchUser().then(user => done(null, user))
+    createUser('google', profile).then(user => done(null, user))
   }
 ))
 

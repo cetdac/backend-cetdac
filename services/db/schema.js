@@ -12,8 +12,8 @@ const Account = connection.define("User", {
       type: Sequelize.STRING(45),
       allowNull: true
     },
-    name:{
-      type: Sequelize.STRING(65),
+    short_name:{
+      type: Sequelize.STRING(20),
       allowNull: true
     },
     first_name: {
@@ -36,20 +36,12 @@ const Account = connection.define("User", {
       type: Sequelize.STRING(255),
       allowNull: true
     },
-    transactions:{
-      type: Sequelize.TEXT,
-      allowNull: true
-    },
     provider:{
       type: Sequelize.STRING(10),
       allowNull: true
     },
-    price:{
-      type: Sequelize.DECIMAL(4,2),
-      allowNull: false
-    },
-    email:{
-      type: Sequelize.STRING(50),
+    emails:{
+      type: Sequelize.STRING(255),
       allowNull: true
     },
     mobile:{
@@ -58,7 +50,11 @@ const Account = connection.define("User", {
     },
     create_time:{
       type: Sequelize.DATE,
-      allowNull:false
+      allowNull: false
+    },
+    update_time:{
+      type: Sequelize.DATE,
+      allowNull: false
     },
     from:{
       //chrome, ios, android
