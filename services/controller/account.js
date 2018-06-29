@@ -3,7 +3,7 @@ const schema = require('../db/schema')
 const uuidv1 = require('uuid/v1')
 
 module.exports = {
-  //post
+
   create: async function(ctx, next) {
     if (!await util.preProcess(ctx, next)) {
       return;
@@ -37,6 +37,27 @@ module.exports = {
         ctx.request,
         undefined,
         "CREATE_ACCOUNT_ERROR",
+        e
+      )
+    })
+  },
+
+  get: async function(ctx, next) {
+    if (!await util.preProcess(ctx, next)) {
+      return;
+    }
+    ctx.params = ctx.params || {};
+    return schema.Account.findById(ctx.query.id).then(account=>{
+      ctx.body = util.jsonResponse(ctx.request, {
+        account: account
+      })
+    }).catch(e=>{
+      //查找account失败
+      console.error(e)
+      ctx.body = util.jsonResponse(
+        ctx.request,
+        undefined,
+        "GET_ACCOUNT_ERROR",
         e
       )
     })

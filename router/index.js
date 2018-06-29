@@ -4,6 +4,8 @@ const account = require('../services/controller/account')
 
 module.exports = function(routers) {
 
+  // account
+  routers.get('/account', account.get)
   routers.post('/account', account.create)
   //google
   routers.get('/auth/google', passport.authenticate('google'))
