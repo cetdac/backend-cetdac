@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize")
 let host = process.env.DB_ENV === "api-dev" ? "47.52.206.244" : "47.52.206.244",
     logging = process.env.NODE_ENV === "api-dev" ? console.log : false,
-    port = process.env.DB_ENV === "production" ? 33066 : 33066
+    port = process.env.DB_ENV === "production" ? 3306 : 33066
 
 var connection = new Sequelize("approles", "approles_admin", "R@NzDu0#uy0m", 
 {
