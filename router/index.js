@@ -12,7 +12,7 @@ module.exports = function(routers) {
   routers.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/auth/fail' }),
     function(ctx, next) {
-    ctx.redirect('/auth/success?id='+ctx.state.user.id)
+    ctx.redirect('/auth/confirm?id='+ctx.state.user.id)
   });
   routers.get('/auth/google/webhook', google.webhook_verify)
 
@@ -20,7 +20,7 @@ module.exports = function(routers) {
   routers.get('/auth/github', passport.authenticate('github'))
   routers.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/auth/fail' }),
     function(ctx, next) {
-    ctx.redirect('/auth/success?id='+ctx.state.user.id)
+    ctx.redirect('/auth/confirm?id='+ctx.state.user.id)
   });
 
   //facebook
@@ -29,6 +29,6 @@ module.exports = function(routers) {
   }))
   routers.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/auth/fail' }),
     function(ctx, next) {
-    ctx.redirect('/auth/success?id='+ctx.state.user.id)
+    ctx.redirect('/auth/confirm?id='+ctx.state.user.id)
   });
 }
