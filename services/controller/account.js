@@ -49,7 +49,7 @@ module.exports = {
     ctx.params = ctx.params || {};
     return schema.Account.findById(ctx.query.id).then(account=>{
       ctx.body = util.jsonResponse(ctx.request, {
-        account: account
+        ...account
       })
     }).catch(e=>{
       //查找account失败
