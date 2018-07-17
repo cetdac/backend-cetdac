@@ -56,9 +56,10 @@ module.exports = {
           id: ctx.params.id
         }
       }).then(account=>{
-      ctx.body = util.jsonResponse(ctx.request, {
-        account: account
-      })
+        console.log(account)
+        ctx.body = util.jsonResponse(ctx.request, {
+          account: account
+        })
     }).catch(e=>{
       //查找account失败
       console.error(e)
