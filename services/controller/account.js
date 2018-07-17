@@ -42,12 +42,39 @@ module.exports = {
     })
   },
 
+  update: async function(ctx, next) {
+    if (!await util.preProcess(ctx, next)) {
+      return;
+    }
+    ctx.params = ctx.params || {};
+    let updateObject = {}
+    for(let p in ctx.request.body){
+      updateObject[p] = ctx.request.body[p]
+    }
+    return schema.Account.update(updateObject,{
+        id: ctx.params.id
+      }).then(account=>{
+      ctx.body = util.jsonResponse(ctx.request, {
+        account: account
+      })
+    }).catch(e=>{
+      //查找account失败
+      console.error(e)
+      ctx.body = util.jsonResponse(
+        ctx.request,
+        undefined,
+        "UPDATE_ACCOUNT_ERROR",
+        e
+      )
+    })
+  },
+
   get: async function(ctx, next) {
     if (!await util.preProcess(ctx, next)) {
       return;
     }
     ctx.params = ctx.params || {};
-    return schema.Account.findById(ctx.query.id).then(account=>{
+    return schema.Account.findById(ctx.params.id).then(account=>{
       ctx.body = util.jsonResponse(ctx.request, {
         account: account
       })
@@ -65,22 +92,22 @@ module.exports = {
 
   createByProfile: async function(userProfile) {
     return schema.Account.create({
-        id: uuidv1(),
-        //如果 id 变化
-        id_in_app: userProfile.id_in_app,
-        short_name: userProfile.short_name,
-        first_name: userProfile.first_name,
-        last_name: userProfile.last_name,
-        birthday: userProfile.birthday,
-        gender: userProfile.gender,
-        avatar: userProfile.avatar,
-        provider: userProfile.provider,
-        mobile: userProfile.mobile,
-        emails: userProfile.emails,
-        from: userProfile.from || 'chrome',
-        status: 'available',
-        create_time:new Date(),
-        update_time:new Date()
-      })
+      id: uuidv1(),
+      //如果 id 变化
+      id_in_app: userProfile.id_in_app,
+      short_name: userProfile.short_name,
+      first_name: userProfile.first_name,
+      last_name: userProfile.last_name,
+      birthday: userProfile.birthday,
+      gender: userProfile.gender,
+      avatar: userProfile.avatar,
+      provider: userProfile.provider,
+      mobile: userProfile.mobile,
+      emails: userProfile.emails,
+      from: userProfile.from || 'chrome',
+      status: 'available',
+      create_time:new Date(),
+      update_time:new Date()
+    })
   }
 }

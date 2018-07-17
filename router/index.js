@@ -5,8 +5,10 @@ const account = require('../services/controller/account')
 module.exports = function(routers) {
 
   // account
-  routers.get('/account', account.get)
+  routers.get('/account/:id', account.get)
   routers.post('/account', account.create)
+  routers.put('/account/:id', account.update)
+
   //google
   routers.get('/auth/google', passport.authenticate('google'))
   routers.get('/auth/google/callback',
