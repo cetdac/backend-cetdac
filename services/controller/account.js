@@ -51,14 +51,13 @@ module.exports = {
     for(let p in ctx.request.body){
       updateObject[p] = ctx.request.body[p]
     }
-    return schema.Account.update(updateObject,{
+    return schema.Account.update(updateObject, {
         where:{
           id: ctx.params.id
         }
-      }).then(account=>{
-        console.log(account)
+      }).then(() => {
         ctx.body = util.jsonResponse(ctx.request, {
-          account: account
+          id: ctx.params.id
         })
     }).catch(e=>{
       //查找account失败
