@@ -52,7 +52,9 @@ module.exports = {
       updateObject[p] = ctx.request.body[p]
     }
     return schema.Account.update(updateObject,{
-        id: ctx.params.id
+        where:{
+          id: ctx.params.id
+        }
       }).then(account=>{
       ctx.body = util.jsonResponse(ctx.request, {
         account: account
