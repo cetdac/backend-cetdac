@@ -93,23 +93,34 @@ module.exports = {
   },
 
   createByProfile: async function(userProfile) {
-    return schema.Account.create({
-      id: uuidv1(),
-      //如果 id 变化
-      id_in_app: userProfile.id_in_app,
-      short_name: userProfile.short_name,
-      first_name: userProfile.first_name,
-      last_name: userProfile.last_name,
-      birthday: userProfile.birthday,
-      gender: userProfile.gender,
-      avatar: userProfile.avatar,
-      provider: userProfile.provider,
-      mobile: userProfile.mobile,
-      emails: userProfile.emails,
-      from: userProfile.from || 'chrome',
-      status: 'available',
-      create_time:new Date(),
-      update_time:new Date()
-    })
+    try{
+      return schema.Account.create({
+        id: uuidv1(),
+        //如果 id 变化
+        id_in_app: userProfile.id_in_app,
+        short_name: userProfile.short_name,
+        first_name: userProfile.first_name,
+        last_name: userProfile.last_name,
+        birthday: userProfile.birthday,
+        gender: userProfile.gender,
+        avatar: userProfile.avatar,
+        provider: userProfile.provider,
+        mobile: userProfile.mobile,
+        emails: userProfile.emails,
+        from: userProfile.from || 'chrome',
+        status: 'available',
+        create_time:new Date(),
+        update_time:new Date()
+      })
+    }
+    catch(e){
+      console.error(e)
+      ctx.body = util.jsonResponse(
+        ctx.request,
+        undefined,
+        "CREATE_ACCOUNT_ERROR",
+        e
+      )
+    }
   }
 }
