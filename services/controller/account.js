@@ -27,19 +27,19 @@ module.exports = {
         create_time:new Date(),
         update_time:new Date()
       }).then(account=>{
-      ctx.body = util.jsonResponse(ctx.request, {
-        account: account
+        ctx.body = util.jsonResponse(ctx.request, {
+          account: account
+        })
+      }).catch(e=>{
+        //查找account失败
+        console.error(e)
+        ctx.body = util.jsonResponse(
+          ctx.request,
+          undefined,
+          "CREATE_ACCOUNT_ERROR",
+          e
+        )
       })
-    }).catch(e=>{
-      //查找account失败
-      console.error(e)
-      ctx.body = util.jsonResponse(
-        ctx.request,
-        undefined,
-        "CREATE_ACCOUNT_ERROR",
-        e
-      )
-    })
   },
 
   update: async function(ctx, next) {
