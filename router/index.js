@@ -33,4 +33,19 @@ module.exports = function(routers) {
     function(ctx, next) {
     ctx.redirect('/auth/confirm?id='+ctx.state.user.id)
   });
+
+  //weixin
+  routers.get('/auth/wechat', passport.authenticate('loginByWeixin'))
+  routers.get('/auth/wechat/callback', passport.authenticate('loginByWeixin', { failureRedirect: '/auth/fail' }),
+  async function(ctx, next) {
+    try{
+      await ctx.login(ctx.state.user)
+      next()
+      ctx.redirect('/')
+    } catch(e){
+      console.error(e)
+    }
+  });
+
+
 }
