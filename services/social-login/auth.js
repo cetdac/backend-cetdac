@@ -97,7 +97,7 @@ passport.use('loginByWeixin', new WeixinStrategy({
   clientSecret: config.wechat.secret,
   callbackURL: config.host + '/api/auth/weixin/callback',
   requireState: false,
-  scope: 'snsapi_login'
+  scope: 'snsapi_base'
 }, function(accessToken, refreshToken, profile, done){
   console.log('wechat', profile)
   createUser('wechat', profile).then(user => done(null, user))
