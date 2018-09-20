@@ -42,7 +42,7 @@ module.exports = {
   getBchBalance: async function(ctx, next) {
     return request(composeRpcData('listunspent', [0, 99999999])).then(body => {
       ctx.status = 200
-      let total = 0 
+      let total = 0
       body.result.forEach(item=>{
         total += item.amount
       })
@@ -53,7 +53,7 @@ module.exports = {
       ctx.body = util.jsonResponse(ctx.request)
     })
   },
-  
+
   getEth: async function(ctx, next) {
   }
 }

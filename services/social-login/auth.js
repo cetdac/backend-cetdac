@@ -25,6 +25,8 @@ const createUser = ((provider, profile) => {
     user.avatar = profile.photos[0] ? profile.photos[0].value : undefined
     user.location = profile.location
     user.short_name = profile.displayName
+  }else if (/wechat/i.test(provider)) {
+    
   }
   
   return account.createByProfile(user)
@@ -89,6 +91,19 @@ passport.use(new GoogleStrategy({
   }
 ))
 
+const WeixinStrategy = require('passport-weixin').Strategy
+passport.use('loginByWeixin', new WeixinStrategy({
+  clientID: config.wechat.appid,
+  clientSecret: config.wechat.secret,
+  callbackURL: config.host + '/api/auth/weixin/callback',
+  requireState: false,
+  scope: 'snsapi_login'
+}, function(accessToken, refreshToken, profile, done){
+  console.log('wechat', profile)
+  createUser('wechat', profile).then(user => done(null, user))
+}));
+
+
 // const TwitterStrategy = require('passport-twitter').Strategy
 // passport.use(new TwitterStrategy({
 //     consumerKey: 'Nv2YHJfZI3pKkXAv8967RW0Tt',
@@ -101,16 +116,6 @@ passport.use(new GoogleStrategy({
 //   }
 // ))
 
-// const WeixinStrategy = require('passport-weixin-plus')
-// passport.use(new WeixinStrategy({
-//   clientID: 'your client id',
-//   clientSecret: 'your key',
-//   callbackURL: 'http://'+host+':' + (process.env.PORT || 3000) + '/auth/weixin/callback',
-//   requireState: false,
-//   scope: 'snsapi_login'
-// }, function(accessToken, refreshToken, profile, done){
-//   fetchUser().then(user => done(null, user))
-// }));
 
 // const WeiboStrategy = require('passport-weibo').Strategy
 // passport.use(new WeiboStrategy({
