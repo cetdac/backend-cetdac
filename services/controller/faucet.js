@@ -1,10 +1,11 @@
-const bch = require('bitcoincashjs')
-const bchaddr = require('bchaddrjs')
 const request = require('request-promise')
 const conf = require('../config')
 const util = require('../util/util')
+const Web3 = require('web3');
+const web3 = new Web3('http://127.0.0.1:8545');
 
 let id = 1
+const ethAddress = '0x83ff5040186119eaed65814dee5a1874629889af'
 
 const composeRpcData = function (method, params) {
   let body = {
@@ -55,8 +56,32 @@ module.exports = {
   },
 
   getEth: async function(ctx, next) {
+    try {
+      const body = ctx.request.body
+      const address = body.address
+      ctx.status = 200
+      ctx.body = util.jsonResponse(ctx.request, await web3.eth.sendTransaction({
+        from: ethAddress,
+        to: address,
+        value: 0.1*1e18
+      }))
+    }
+    catch(e){
+      console.error(e)
+      ctx.status = 500
+      ctx.body = util.jsonResponse(ctx.request)
+    }
   },
 
   getEthBalance: async function(ctx, next) {
+    try {
+      ctx.status = 200
+      ctx.body = util.jsonResponse(ctx.request, await web3.eth.getBalance(ethAddress))
+    }
+    catch(e){
+      console.error(e)
+      ctx.status = 500
+      ctx.body = util.jsonResponse(ctx.request)
+    }
   }
 }
