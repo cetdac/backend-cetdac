@@ -27,7 +27,7 @@ const composeRpcData = function (method, params) {
 
 module.exports = {
   getBch: async function(ctx, next) {
-    const body = ctx.requet.body
+    const body = ctx.request.body
     let address = body.address
     request(composeRpcData('sendtoaddress', [address, 0.1])).then(body => {
       ctx.status = 200
