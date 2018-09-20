@@ -55,5 +55,8 @@ module.exports = {
   },
 
   getEth: async function(ctx, next) {
+  },
+
+  getEthBalance: async function(ctx, next) {
   }
 }

@@ -7,11 +7,13 @@ const Redis = require('ioredis')
 
 module.exports = function(routers) {
 
-  let writeLimit = ratelimit({
+  let getLimit = ratelimit({
       db: new Redis(6379),
       duration: 1000 * 60 * 60 * 12,
       errorMessage: 'REQUEST_FREQUENCY_LIMIT',
-      id: (ctx) => ctx.request.header["x-real-ip"],
+      id: (ctx) => {
+        return ctx.request.body.address + ctx.request.header["x-real-ip"]
+      },
       headers: {
           remaining: 'Rate-Limit-Remaining',
           reset: 'Rate-Limit-Reset',
@@ -22,9 +24,10 @@ module.exports = function(routers) {
   })
 
   // faucet
-  routers.post('/faucet/getbch', writeLimit, faucet.getBch)
+  routers.post('/faucet/getbch', getLimit, faucet.getBch)
   routers.get('/faucet/bchbalance', faucet.getBchBalance)
-  routers.post('/faucet/geteth', writeLimit, faucet.getEth)
+  routers.post('/faucet/geteth', getLimit, faucet.getEth)
+  routers.get('/faucet/ethbalance', faucet.getEthBalance)
 
 
   // account
