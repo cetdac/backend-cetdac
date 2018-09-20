@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@log4js-node/smtp": "^1.0.0",
+    "bchaddrjs": "^0.2.2",
     "bitcoin-core": "^2.0.0",
     "bitcoincashjs": "^0.1.10",
     "bitcoinjs-lib": "^3.3.2",
@@ -38,6 +39,7 @@
     "paypal-rest-sdk": "^1.8.1",
     "redis": "^2.8.0",
     "request": "^2.87.0",
+    "request-promise": "^4.2.2",
     "sequelize": "^4.37.10",
     "swagger2": "0.0.24",
     "swagger2-koa": "0.0.36",
