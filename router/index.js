@@ -12,6 +12,7 @@ module.exports = function(routers) {
       duration: 1000 * 60 * 60 * 12,
       errorMessage: 'REQUEST_FREQUENCY_LIMIT',
       id: (ctx) => {
+        console.log(ctx.request.body.address)
         return ctx.request.body.address + ctx.request.header["x-real-ip"]
       },
       headers: {
