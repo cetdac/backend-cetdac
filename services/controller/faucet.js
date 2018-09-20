@@ -29,7 +29,7 @@ module.exports = {
   getBch: async function(ctx, next) {
     const body = ctx.request.body
     let address = body.address
-    request(composeRpcData('sendtoaddress', [address, 0.1])).then(body => {
+    return request(composeRpcData('sendtoaddress', [address, 0.1])).then(body => {
       ctx.status = 200
       ctx.body = util.jsonResponse(ctx.request, {txid: body.result})
     }).catch(e => {
