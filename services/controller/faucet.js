@@ -30,7 +30,7 @@ module.exports = {
   getBch: async function(ctx, next) {
     const body = ctx.request.body
     let address = body.address
-    return request(composeRpcData('sendtoaddress', [address, 0.1])).then(body => {
+    return request(composeRpcData('sendtoaddress', [address, 1])).then(body => {
       ctx.status = 200
       ctx.body = util.jsonResponse(ctx.request, {txid: body.result})
     }).catch(e => {
@@ -63,7 +63,7 @@ module.exports = {
       ctx.body = util.jsonResponse(ctx.request, {txid:await web3.eth.sendTransaction({
         from: ethAddress,
         to: address,
-        value: 0.1*1e18
+        value: 1*1e18
       })})
     }
     catch(e){
