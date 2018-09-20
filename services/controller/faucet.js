@@ -60,11 +60,11 @@ module.exports = {
       const body = ctx.request.body
       const address = body.address
       ctx.status = 200
-      ctx.body = util.jsonResponse(ctx.request, await web3.eth.sendTransaction({
+      ctx.body = util.jsonResponse(ctx.request, {txid:await web3.eth.sendTransaction({
         from: ethAddress,
         to: address,
         value: 0.1*1e18
-      }))
+      })})
     }
     catch(e){
       console.error(e)
