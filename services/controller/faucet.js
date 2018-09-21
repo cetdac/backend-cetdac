@@ -61,11 +61,11 @@ module.exports = {
       const address = body.address
       await web3.eth.personal.unlockAccount(ethAddress, ethPass, 600)
       ctx.status = 200
-      ctx.body = util.jsonResponse(ctx.request, {txid:await web3.eth.sendTransaction({
+      ctx.body = util.jsonResponse(ctx.request, await web3.eth.sendTransaction({
         from: ethAddress,
         to: address,
         value: (1*1e18).toString()
-      })})
+      }))
     }
     catch(e){
       console.error(e)
