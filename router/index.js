@@ -19,7 +19,7 @@ module.exports = function(routers) {
           reset: 'Rate-Limit-Reset',
           total: 'Rate-Limit-Total'
       },
-      max: 1,
+      max: 3,
       disableHeader: false,
   })
 
