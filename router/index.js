@@ -19,7 +19,7 @@ module.exports = function(routers) {
           reset: 'Rate-Limit-Reset',
           total: 'Rate-Limit-Total'
       },
-      max: 3,
+      max: 1,
       disableHeader: false,
   })
 
@@ -31,9 +31,9 @@ module.exports = function(routers) {
       return ctx.request.header["x-real-ip"]
     },
     headers: {
-        remaining: 'Rate-Limit-Remaining',
-        reset: 'Rate-Limit-Reset',
-        total: 'Rate-Limit-Total'
+        remaining: 'Ip-Limit-Remaining',
+        reset: 'Ip-Limit-Reset',
+        total: 'Ip-Limit-Total'
     },
     max: 6,
     disableHeader: false,
