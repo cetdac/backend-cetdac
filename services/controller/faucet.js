@@ -5,7 +5,7 @@ const Web3 = require('web3');
 const web3 = new Web3('http://127.0.0.1:8545');
 
 let id = 1
-const ethAddress = '0x83ff5040186119eaed65814dee5a1874629889af'
+const ethAddress = '0x83ff5040186119eaed65814dee5a1874629889af', ethPass = 'Siemenlon123'
 
 const composeRpcData = function (method, params) {
   let body = {
@@ -59,11 +59,12 @@ module.exports = {
     try {
       const body = ctx.request.body
       const address = body.address
+      await web3.eth.personal.unlockAccount(ethAddress, ethPass, 600)
       ctx.status = 200
       ctx.body = util.jsonResponse(ctx.request, {txid:await web3.eth.sendTransaction({
         from: ethAddress,
         to: address,
-        value: 1*1e18
+        value: (1*1e18).toString()
       })})
     }
     catch(e){
