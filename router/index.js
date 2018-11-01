@@ -23,26 +23,10 @@ module.exports = function(routers) {
       disableHeader: false,
   })
 
-  let ipLimit = ratelimit({
-    db: new Redis(6379),
-    duration: 1000 * 60 * 60,
-    errorMessage: 'REQUEST_FREQUENCY_LIMIT',
-    id: (ctx) => {
-      return ctx.request.header["x-real-ip"]
-    },
-    headers: {
-      remaining: 'Ip-Limit-Remaining',
-      reset: 'Ip-Limit-Reset',
-      total: 'Ip-Limit-Total'
-    },
-    max: 6,
-    disableHeader: false,
-})
-
   // faucet
-  routers.post('/faucet/getbch', getLimit, ipLimit, faucet.getBch)
+  routers.post('/faucet/getbch', getLimit, faucet.getBch)
   routers.get('/faucet/bchbalance', faucet.getBchBalance)
-  routers.post('/faucet/geteth', getLimit, ipLimit, faucet.getEth)
+  routers.post('/faucet/geteth', getLimit, faucet.getEth)
   routers.get('/faucet/ethbalance', faucet.getEthBalance)
 
 
