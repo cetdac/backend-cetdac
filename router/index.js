@@ -26,7 +26,7 @@ module.exports = function(routers) {
   // faucet
   routers.post('/faucet/getbch', getLimit, faucet.getBch)
   routers.get('/faucet/bchbalance', faucet.getBchBalance)
-  routers.post('/faucet/geteth', faucet.getEth)
+  routers.post('/faucet/geteth', getLimit, faucet.getEth)
   routers.get('/faucet/ethbalance', faucet.getEthBalance)
 
 
