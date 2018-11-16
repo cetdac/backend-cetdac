@@ -66,7 +66,8 @@ module.exports = {
       let signedTx = await decryptedAccount.signTransaction({
         from: ethAddress,
         to: address,
-        value: (1*1e18).toString()
+        value: (1*1e18).toString(),
+        gas: 200000
       })
       console.log(signedTx)
       ctx.status = 200
