@@ -69,7 +69,6 @@ module.exports = {
         value: (1*1e18).toString(),
         gas: 200000
       })
-      console.log(signedTx)
       ctx.status = 200
       ctx.body = util.jsonResponse(ctx.request, await web3.eth.sendSignedTransaction(signedTx.rawTransaction))
     }
