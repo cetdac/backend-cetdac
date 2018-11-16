@@ -2,7 +2,7 @@ const request = require('request-promise')
 const conf = require('../config')
 const util = require('../util/util')
 const Web3 = require('web3');
-const web3 = new Web3('https://ethnode.bitapp.net.cn/ropsten');
+const web3 = new Web3('http://ethnode.bitapp.net.cn/ropsten');
 
 let id = 1
 const ethAddress = '0x83ff5040186119eaed65814dee5a1874629889af'
