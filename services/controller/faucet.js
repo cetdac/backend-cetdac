@@ -66,6 +66,7 @@ module.exports = {
         to: address,
         value: (1*1e18).toString()
       })
+      console.log(signedTransactionData)
       ctx.body = util.jsonResponse(ctx.request, await web3.eth.sendSignedTransaction(signedTransactionData))
     }
     catch(e){
