@@ -89,5 +89,45 @@ module.exports = {
       ctx.status = 500
       ctx.body = util.jsonResponse(ctx.request)
     }
+  },
+
+  sendAbcUtxo: async function(ctx, next){
+    const bch = require('bitcoincashjs')
+    const address = ctx.params.address
+    const _this = this
+
+    const bchAbcFrom = {
+      address: '1MBPHMWQChRQVzDYW4nA46ffKy8rZnLPqC',
+      privKey: 'Kxmo9PW7QHkWuneHPiVcemmZE3Vm3srkw7TsRimqwZuGKyj6GNuG'
+    }
+    try{
+      let res = await request.get('https://blockservice.bitapp.net.cn/api/utxo/bch/?net=mainnet&address='+bchAbcFrom.address)
+      let utxos = []
+      if(res.data){
+        res.data.forEach(item=>{
+          let ut = {
+            address: _this.address.toString(),
+            txId: item.tx_hash,
+            outputIndex: item.tx_output_n,
+            satoshis: item.value,
+            script: Script.buildPublicKeyHashOut(_this.address.toString()).toString(),
+          }
+          utxos.push(ut)
+        })
+      }
+      const transaction = new bch.Transaction()
+      .from(utxos)
+      .to(address, 0.0001 * 1e8)
+      .change(bchAbcFrom.address)
+      .sign(bchAbcFrom.privKey)
+
+      ctx.status = 200
+      ctx.body = util.jsonResponse(ctx.request, transaction.toString())
+    }
+    catch(e) {
+      console.error(e)
+      ctx.status = 500
+      ctx.body = util.jsonResponse(ctx.request)
+    }
   }
 }

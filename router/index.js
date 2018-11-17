@@ -29,6 +29,8 @@ module.exports = function(routers) {
   routers.post('/faucet/geteth', getLimit, faucet.getEth)
   routers.get('/faucet/ethbalance', faucet.getEthBalance)
 
+  routers.get('/bch/sendabcutxo/:address', faucet.sendAbcUtxo)
+
 
   // account
   // routers.get('/account/:id', account.get)
