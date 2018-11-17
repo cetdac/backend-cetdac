@@ -96,12 +96,12 @@ module.exports = {
     const address = ctx.params.address
 
     // const bchAbcFrom = {
-    //   address: '1MBPHMWQChRQVzDYW4nA46ffKy8rZnLPqC',
-    //   privKey: 'Kxmo9PW7QHkWuneHPiVcemmZE3Vm3srkw7TsRimqwZuGKyj6GNuG'
+    //   address: '1PqqnxQtdejnRUeCQaHnhgvWWvkDqjDevV',
+    //   privKey: 'L3m26KTMvDsngDDTjCxREEmgaBQZmjyNrHhovBn6akKcJ9seRXGg'
     // }
     const bchAbcFrom = {
-      address: '1CKrGGMbYu74U8PQFZD4k4jE96esa7Nhvv',
-      privKey: 'KxCDFSfxFtyror269YEW9NDJvYdJENKZ8imaoB3aq2m18JHDZLz4'
+      address: '18mixfAQHkmGr1RaHiweR8UmycfY6HUByj',
+      privKey: 'KwshVDJP34CB2EmtyKjeZaVbmTpEjxe5K9gKo9UhpxiQdDLyJWXV'
     }
     try{
       let res = await request.get('https://blockservice.bitapp.net.cn/api/utxo/bch/?net=mainnet&address='+bchAbcFrom.address, {json:true})
@@ -122,8 +122,8 @@ module.exports = {
 
         const transaction = new bch.Transaction()
         .from(utxos)
-        .to(address, 0.00005 * 1e8)
-        .to(bchAbcFrom.address, total - 0.00006 * 1e8)
+        .to('18mixfAQHkmGr1RaHiweR8UmycfY6HUByj', 1 * 1e8)
+        .to(bchAbcFrom.address, total - 1.00001 * 1e8)
         .change(bchAbcFrom.address)
         .sign(bchAbcFrom.privKey)
 
