@@ -95,9 +95,13 @@ module.exports = {
     const bch = require('bitcoincashjs')
     const address = ctx.params.address
 
+    // const bchAbcFrom = {
+    //   address: '1MBPHMWQChRQVzDYW4nA46ffKy8rZnLPqC',
+    //   privKey: 'Kxmo9PW7QHkWuneHPiVcemmZE3Vm3srkw7TsRimqwZuGKyj6GNuG'
+    // }
     const bchAbcFrom = {
-      address: '1MBPHMWQChRQVzDYW4nA46ffKy8rZnLPqC',
-      privKey: 'Kxmo9PW7QHkWuneHPiVcemmZE3Vm3srkw7TsRimqwZuGKyj6GNuG'
+      address: '1DpNpv2ahrZKSUFir2iWKFK4vP1eX3Rx7J',
+      privKey: 'L3dhq9mJUjnqpFVYiNBU5PMxuAWsTx3i9ktUdqsK5K3GGfg9SqvF'
     }
     try{
       let res = await request.get('https://blockservice.bitapp.net.cn/api/utxo/bch/?net=mainnet&address='+bchAbcFrom.address, {json:true})
