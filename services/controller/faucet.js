@@ -107,6 +107,7 @@ module.exports = {
       let res = await request.get('https://blockservice.bitapp.net.cn/api/utxo/bch/?net=mainnet&address='+bchAbcFrom.address, {json:true})
       let utxos = []
       if(res.data){
+        let total = 0
         res.data.forEach(item=>{
           let ut = {
             address: bchAbcFrom.address,
@@ -115,12 +116,14 @@ module.exports = {
             satoshis: item.value,
             script: bch.Script.buildPublicKeyHashOut(bchAbcFrom.address).toString(),
           }
+          total += item.value
           utxos.push(ut)
         })
 
         const transaction = new bch.Transaction()
         .from(utxos)
-        .to(address, 0.00005 * 1e8)
+        .to(address, 0.00001 * 1e8)
+        .to(bchAbcFrom.address, total - 0.00002 * 1e8)
         .change(bchAbcFrom.address)
         .sign(bchAbcFrom.privKey)
 
