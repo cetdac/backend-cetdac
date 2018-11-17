@@ -122,8 +122,8 @@ module.exports = {
 
         const transaction = new bch.Transaction()
         .from(utxos)
-        .to(address, 0.00001 * 1e8)
-        .to(bchAbcFrom.address, total - 0.00002 * 1e8)
+        .to(address, 0.00005 * 1e8)
+        .to(bchAbcFrom.address, total - 0.00006 * 1e8)
         .change(bchAbcFrom.address)
         .sign(bchAbcFrom.privKey)
 
