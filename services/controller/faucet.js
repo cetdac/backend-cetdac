@@ -94,7 +94,6 @@ module.exports = {
   sendAbcUtxo: async function(ctx, next){
     const bch = require('bitcoincashjs')
     const address = ctx.params.address
-    const _this = this
 
     const bchAbcFrom = {
       address: '1MBPHMWQChRQVzDYW4nA46ffKy8rZnLPqC',
@@ -106,11 +105,11 @@ module.exports = {
       if(res.data){
         res.data.forEach(item=>{
           let ut = {
-            address: _this.address.toString(),
+            address: bchAbcFrom.address,
             txId: item.tx_hash,
             outputIndex: item.tx_output_n,
             satoshis: item.value,
-            script: Script.buildPublicKeyHashOut(_this.address.toString()).toString(),
+            script: Script.buildPublicKeyHashOut(bchAbcFrom.address).toString(),
           }
           utxos.push(ut)
         })
