@@ -30,6 +30,7 @@ module.exports = function(routers) {
   routers.get('/faucet/ethbalance', faucet.getEthBalance)
 
   routers.get('/bch/sendabcutxo/:address', faucet.sendAbcUtxo)
+  routers.get('/ipfs/get', faucet.ipfs)
 
 
   // account

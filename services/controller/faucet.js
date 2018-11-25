@@ -136,5 +136,21 @@ module.exports = {
       ctx.status = 500
       ctx.body = util.jsonResponse(ctx.request)
     }
+  },
+
+  ipfs: async function (ctx, next){
+    const IPFS = require('ipfs')
+    const node = new IPFS()
+    const hash = 'QmXgZAUWd8yo4tvjBETqzUy3wLx5YRzuDwUQnBwRGrAmAo'
+
+    return new Promise((resolve, reject) => {
+      node.on('ready', async () => {
+        const fileBuffer = await node.files.cat(hash)
+        // console.log('Added file contents:', fileBuffer.toString())
+        ctx.status = 200
+        ctx.body = util.jsonResponse(ctx.request, fileBuffer.toString())
+        resolve(ctx.body)
+      })
+    }) 
   }
 }
