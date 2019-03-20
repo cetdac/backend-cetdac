@@ -5,7 +5,7 @@
       "instance_var":"APPROLES",
       "script"    : "app.js",
       "instances" : 0,
-      "exec_mode" : "fork",
+      "exec_mode" : "cluster",
       "watch"     : false,
       "ignore_watch" : ["logs"],
       "error_file":"logs/approles.service.stderr.log",
