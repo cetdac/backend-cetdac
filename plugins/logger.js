@@ -53,34 +53,34 @@ const logConfig = {
       level: "ERROR",
       appender: "errorFile",
     },
-    errorEmailSender: {
-      ...smtpAppender,
-      subject: "[❌Error] WE_PROMISE_SERVICE 最近1小时错误日志",
-      attachment: {
-        ...smtpAppender.attachment,
-        filename: "error.log",
-      },
-      sendInterval: 3600, // 错误日志一小时发送一次
-    },
-    errorEmail: { // 发送错误日志邮件
-      type: "logLevelFilter",
-      level: "ERROR",
-      appender: "errorEmailSender",
-    },
-    commonEmailSender: {
-      ...smtpAppender,
-      subject: "[⚠️Common] WE_PROMISE_SERVICE 最近4小时普通日志",
-      attachment: {
-        ...smtpAppender.attachment,
-        filename: "common.log",
-      },
-      sendInterval: 14400, // 普通日志4小时发送一次
-    },
-    commonEmail: { // 发送普通日志邮件
-      type: "logLevelFilter",
-      level: "INFO",
-      appender: "commonEmailSender",
-    },
+    // errorEmailSender: {
+    //   ...smtpAppender,
+    //   subject: "[❌Error] WE_PROMISE_SERVICE 最近1小时错误日志",
+    //   attachment: {
+    //     ...smtpAppender.attachment,
+    //     filename: "error.log",
+    //   },
+    //   sendInterval: 3600, // 错误日志一小时发送一次
+    // },
+    // errorEmail: { // 发送错误日志邮件
+    //   type: "logLevelFilter",
+    //   level: "ERROR",
+    //   appender: "errorEmailSender",
+    // },
+    // commonEmailSender: {
+    //   ...smtpAppender,
+    //   subject: "[⚠️Common] WE_PROMISE_SERVICE 最近4小时普通日志",
+    //   attachment: {
+    //     ...smtpAppender.attachment,
+    //     filename: "common.log",
+    //   },
+    //   sendInterval: 14400, // 普通日志4小时发送一次
+    // },
+    // commonEmail: { // 发送普通日志邮件
+    //   type: "logLevelFilter",
+    //   level: "INFO",
+    //   appender: "commonEmailSender",
+    // },
     debug: {
       type: "console",
     },
@@ -103,7 +103,7 @@ if (process.env.LOG_ENV !== "production") {
   };
 }
 
-//log4js.configure(logConfig);
+log4js.configure(logConfig);
 const logger = log4js.getLogger();
 
 console.log = console.info = logger.info.bind(logger);
