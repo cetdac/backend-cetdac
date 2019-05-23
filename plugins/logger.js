@@ -103,7 +103,7 @@ if (process.env.LOG_ENV !== "production") {
   };
 }
 
-log4js.configure(logConfig);
+//log4js.configure(logConfig);
 const logger = log4js.getLogger();
 
 console.log = console.info = logger.info.bind(logger);
