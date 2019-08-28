@@ -2,35 +2,38 @@
 // const google = require('../services/controller/google')
 // const account = require('../services/controller/account')
 const faucet = require('../services/controller/faucet')
+const hello = require('../services/controller/hello')
 const ratelimit = require('koa-ratelimit')
 const Redis = require('ioredis')
 
 module.exports = function(routers) {
 
-  let getLimit = ratelimit({
-      db: new Redis(6379),
-      duration: 1000 * 60 * 60 * 12,
-      errorMessage: 'REQUEST_FREQUENCY_LIMIT',
-      id: (ctx) => {
-        return ctx.request.body.address + ctx.request.header["x-real-ip"]
-      },
-      headers: {
-        remaining: 'Rate-Limit-Remaining',
-        reset: 'Rate-Limit-Reset',
-        total: 'Rate-Limit-Total'
-      },
-      max: 1,
-      disableHeader: false,
-  })
+  // let getLimit = ratelimit({
+  //     db: new Redis(6379),
+  //     duration: 1000 * 60 * 60 * 12,
+  //     errorMessage: 'REQUEST_FREQUENCY_LIMIT',
+  //     id: (ctx) => {
+  //       return ctx.request.body.address + ctx.request.header["x-real-ip"]
+  //     },
+  //     headers: {
+  //       remaining: 'Rate-Limit-Remaining',
+  //       reset: 'Rate-Limit-Reset',
+  //       total: 'Rate-Limit-Total'
+  //     },
+  //     max: 1,
+  //     disableHeader: false,
+  // })
 
   // faucet
-  routers.post('/faucet/getbch', getLimit, faucet.getBch)
-  routers.get('/faucet/bchbalance', faucet.getBchBalance)
-  routers.post('/faucet/geteth', getLimit, faucet.getEth)
-  routers.get('/faucet/ethbalance', faucet.getEthBalance)
+  // routers.post('/faucet/getbch', getLimit, faucet.getBch)
+  // routers.get('/faucet/bchbalance', faucet.getBchBalance)
+  // routers.post('/faucet/geteth', getLimit, faucet.getEth)
+  // routers.get('/faucet/ethbalance', faucet.getEthBalance)
 
-  routers.get('/bch/sendabcutxo/:address', faucet.sendAbcUtxo)
-  routers.get('/ipfs/get', faucet.ipfs)
+  // routers.get('/bch/sendabcutxo/:address', faucet.sendAbcUtxo)
+  // routers.get('/ipfs/get', faucet.ipfs)
+
+  routers.get('/hello', hello.hello)
 
 
   // account
