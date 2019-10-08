@@ -1,6 +1,5 @@
-let host = process.env.NODE_ENV === 'api-dev' ? 'https://chrome.bitapp.net' : 'https://chrome.bitapp.net',
+let host = process.env.NODE_ENV === 'development' ? 'https://chrome.bitapp.net' : 'https://chrome.bitapp.net',
     rpc = 'http://bchtest:Z0i3fdJnlq71ShNz@localhost:8332'
-
 module.exports = {
   rpc:{
     url: rpc

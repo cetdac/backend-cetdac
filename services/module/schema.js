@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize"),
-  connection = require("../db/connection")
+  connection = require("../module/connection")
 
 const Account = connection.define("User", {
     id: {

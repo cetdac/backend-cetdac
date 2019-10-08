@@ -1,4 +1,4 @@
-const connection = require("../services/db/connection")
-schema = require('../services/db/schema')
+const connection = require("../services/module/connection")
+schema = require('../services/module/schema')
 
 connection.sync({force:true})

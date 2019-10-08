@@ -6,8 +6,14 @@ const hello = require('../services/controller/hello')
 const ratelimit = require('koa-ratelimit')
 const Redis = require('ioredis')
 
-module.exports = function(routers) {
+const CETDAC = require('../services/controller/cetdac')
+const POOL = require('../services/controller/pool')
 
+
+const cetdac = new CETDAC()
+const pool = new POOL()
+
+module.exports = function(routers) {
   // let getLimit = ratelimit({
   //     db: new Redis(6379),
   //     duration: 1000 * 60 * 60 * 12,
@@ -34,6 +40,11 @@ module.exports = function(routers) {
   // routers.get('/ipfs/get', faucet.ipfs)
 
   routers.get('/hello', hello.hello)
+  routers.post('/cetdac', cetdac.saveMessage)
+  routers.get('/cetdac', cetdac.find)
+  routers.post('/vote',pool.recordSave)
+  routers.get('/record',pool.recordFind)
+  routers.get('/poolinfo',pool.poolInfo)
 
 
   // account
@@ -64,5 +75,13 @@ module.exports = function(routers) {
   // routers.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/auth/fail' }),
   //   function(ctx, next) {
   //   ctx.redirect('/auth/confirm?id='+ctx.state.user.id)
+  // });
+
+
+  // routers.all('*', function(req, res, next) {
+  //   res.header("Access-Control-Allow-Origin", "*");
+  //   res.header("Access-Control-Allow-Headers", "X-Requested-With,Content-Type");
+  //   res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+  //   next();
   // });
 }

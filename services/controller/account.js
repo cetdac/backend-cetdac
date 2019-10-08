@@ -1,5 +1,5 @@
 const util = require('../util/util')
-const schema = require('../db/schema')
+const schema = require('../module/schema')
 const uuidv1 = require('uuid/v1')
 
 module.exports = {
