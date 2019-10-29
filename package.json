@@ -41,7 +41,7 @@
     "redis": "^2.8.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
-    "sequelize": "^5.18.1",
+    "sequelize": "^5.15.1",
     "swagger2": "1.0.5",
     "swagger2-koa": "1.0.4"
   },
