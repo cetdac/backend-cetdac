@@ -23,7 +23,7 @@
     "koa-session": "^5.12.3",
     "koa-static": "^5.0.0",
     "koa2-cors": "^2.0.6",
-    "log4js": "^5.1.0",
+    "log4js": "^5.3.0",
     "loggly": "^1.1.1",
     "md5": "^2.2.1",
     "mongolass": "^4.4.3",
