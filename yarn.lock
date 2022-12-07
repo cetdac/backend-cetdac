@@ -610,10 +610,10 @@ bluebird@3.5.1:
   resolved "https://registry.npm.taobao.org/bluebird/download/bluebird-3.5.1.tgz#d9551f9de98f1fcda1e683d17ee91a0602ee2eb9"
   integrity sha1-2VUfnemPH82h5oPRfukaBgLuLrk=
 
-bluebird@^3.4.1, bluebird@^3.5.0, bluebird@^3.5.3:
-  version "3.5.5"
-  resolved "https://registry.npm.taobao.org/bluebird/download/bluebird-3.5.5.tgz#a8d0afd73251effbbd5fe384a77d73003c17a71f"
-  integrity sha1-qNCv1zJR7/u9X+OEp31zADwXpx8=
+bluebird@^3.4.1, bluebird@^3.5.0, bluebird@^3.7.1:
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
+  integrity sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
 
 bn.js@^4.11.8, bn.js@^4.4.0:
   version "4.11.8"
@@ -4929,10 +4929,10 @@ sinon-test@^2.4.0:
   resolved "https://registry.npm.taobao.org/sinon-test/download/sinon-test-2.4.0.tgz#dffb7caaac75107823c30c9152aeebd44e61adb1"
   integrity sha1-3/t8qqx1EHgjwwyRUq7r1E5hrbE=
 
-sinon@^7.2.3:
-  version "7.4.2"
-  resolved "https://registry.npm.taobao.org/sinon/download/sinon-7.4.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fsinon%2Fdownload%2Fsinon-7.4.2.tgz#ecd54158fef2fcfbdb231a3fa55140e8cb02ad6c"
-  integrity sha1-7NVBWP7y/PvbIxo/pVFA6MsCrWw=
+sinon@^7.5.0:
+  version "7.5.0"
+  resolved "https://registry.yarnpkg.com/sinon/-/sinon-7.5.0.tgz#e9488ea466070ea908fd44a3d6478fd4923c67ec"
+  integrity sha512-AoD0oJWerp0/rY9czP/D6hDTTUYGpObhZjMpd7Cl/A6+j0xBE+ayL/ldfggkBXUs0IkvIiM1ljM8+WkOc5k78Q==
   dependencies:
     "@sinonjs/commons" "^1.4.0"
     "@sinonjs/formatio" "^3.2.1"
@@ -5202,10 +5202,10 @@ superagent@^3.6.0, superagent@^3.8.3:
     qs "^6.5.1"
     readable-stream "^2.3.5"
 
-supertest@^3.4.1:
-  version "3.4.2"
-  resolved "https://registry.npm.taobao.org/supertest/download/supertest-3.4.2.tgz#bad7de2e43d60d27c8caeb8ab34a67c8a5f71aad"
-  integrity sha1-utfeLkPWDSfIyuuKs0pnyKX3Gq0=
+supertest@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/supertest/-/supertest-4.0.2.tgz#c2234dbdd6dc79b6f15b99c8d6577b90e4ce3f36"
+  integrity sha512-1BAbvrOZsGA3YTCWqbmh14L0YEq0EGICX/nBnfkfVJn7SrxQV1I3pMYjSzG9y/7ZU2V9dWqyqk2POwxlb09duQ==
   dependencies:
     methods "^1.1.2"
     superagent "^3.8.3"
@@ -5505,19 +5505,19 @@ unique-string@^1.0.0:
   dependencies:
     crypto-random-string "^1.0.0"
 
-unit.js@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.npm.taobao.org/unit.js/download/unit.js-2.1.0.tgz#d91654c6fe86985e3ac55af564436ce475109c8c"
-  integrity sha1-2RZUxv6GmF46xVr1ZENs5HUQnIw=
+unit.js@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/unit.js/-/unit.js-2.1.1.tgz#a07b347b5d629cbb8b2490066dc82e23c395d80c"
+  integrity sha512-v9md/m+cpqrBuZIgdj4SK774XPnkBsoByN5K0ZOozyXAY9BkWgcOr9idZrrIrU+uKxLA6E/XlClcquuIw63qwA==
   dependencies:
-    bluebird "^3.5.3"
-    lodash "^4.17.11"
+    bluebird "^3.7.1"
+    lodash "^4.17.15"
     must "^0.13.4"
     noder.io ">= 1.0.0 < 2.0.0"
     should "^13.2.3"
-    sinon "^7.2.3"
+    sinon "^7.5.0"
     sinon-test "^2.4.0"
-    supertest "^3.4.1"
+    supertest "^4.0.2"
 
 universalify@^0.1.0:
   version "0.1.2"
